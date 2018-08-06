@@ -37,21 +37,37 @@ def init_save_dir(dir):
     return dir
 
 def save_image(urltoimage,path,name):
-    r = requests.get(urltoimage, stream=True)
-    if r.status_code == 200:
-        with open(path+name, 'wb') as f:
-            total_length = int(r.headers.get('content-length'))
-            for chunk in progress.bar(r.iter_content(chunk_size=1024), expected_size=(total_length/1024) + 1): 
-                if chunk:
-                    f.write(chunk)
-                    f.flush()
-            #r.raw.decode_content = True
-            #shutil.copyfileobj(r.raw, f)
+    if not os.path.isfile(path+name):
+        r = requests.get(urltoimage, stream=True)
+        if r.status_code == 200:
+            with open(path+name, 'wb') as f:
+                total_length = int(r.headers.get('content-length'))
+                for chunk in progress.bar(r.iter_content(chunk_size=1024), expected_size=(total_length/1024) + 1): 
+                    if chunk:
+                        f.write(chunk)
+                        f.flush()
+    else:
+        print(name + " exists! Skipping...")
+
+def exists(path,name):
+    if not os.path.isfile(path+name):
+        return False
+    else:
+        print(name + " exists! Skipping...")
+        return True
 
 def find_date_in_url(url):
     s = url.find("comics/") + len("comics/")
     e = url.find(".",s)
     return url[s:e]
+
+def find_start_page(path):
+    dir = os.listdir(path)
+    lastpage = 1
+    for item in dir:
+        endchr = str(item).find("_")
+        lastpage = item[:endchr]
+    return int(lastpage)
 
 def main():
     print(".: TwoKinds Backup/Archive Creator :.")
@@ -62,7 +78,12 @@ def main():
 
     path = init_save_dir("twokinds/")
 
-    for i in range (1,int(pagecount)):
+    start = find_start_page(path)
+
+    if start != 1:
+        print("Previous backup detected, resuming from last downloaded page...")
+
+    for i in range (start,int(pagecount)):
         f = get_page(baseurl+str(i))
         print("Saving page " + str(i) + " / " + str(pagecount) + " ...")
         url = find_comic_img(f)

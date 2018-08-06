@@ -24,8 +24,8 @@ python 2kinds.py
 
 ## Next Steps
 These are items I thought of, but didn't do yet:
-- Don't re-download pages that are already downloaded
-    - this way, the tool can be run on a schedule to maintain an offline backup of the comic
+- ~~Don't re-download pages that are already downloaded~~
+    - ~~this way, the tool can be run on a schedule to maintain an offline backup of the comic~~
 - Combine downloaded images into PDF upon run
 
     
