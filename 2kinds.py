@@ -83,7 +83,7 @@ def main():
     if start != 1:
         print("Previous backup detected, resuming from last downloaded page...")
 
-    for i in range (start,int(pagecount)):
+    for i in range (start,int(pagecount)+1):
         f = get_page(baseurl+str(i))
         print("Saving page " + str(i) + " / " + str(pagecount) + " ...")
         url = find_comic_img(f)
