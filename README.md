@@ -18,8 +18,18 @@ pip install -r requirements.txt
 
 ## Running the script
 ```bash
-python twokinds.py # downloads all pages as images
-python twopdf.py -m {single,chapters} # combines images into a PDF or multiple PDFs by chapter
+python .\2kinds.py -h
+usage: python 2kinds.py [-h] [-d] [-p {single,chapters}]
+
+Archiving TwoKinds Comic
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --download        Download all pages
+  -p {single,chapters}, --pdf {single,chapters}
+                        Combine pages into PDF(s); Single PDF or Multiple
+                        PDFs, grouped by chapter: default is 'single' if no
+                        mode is provided
 ```
 
 
