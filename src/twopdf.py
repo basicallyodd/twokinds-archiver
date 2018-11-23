@@ -13,6 +13,9 @@ def singlepdf():
                 p = p.convert('RGB')
             pages.append(p)
     
+    if not os.path.exists(os.getcwd()+"\\twokinds-pdfs"):
+        os.makedirs(os.getcwd()+"\\twokinds-pdfs")
+    
     output_filename = os.getcwd()+"\\twokinds-pdfs\\TwoKinds.pdf"
 
     #logo = Image.open(os.getcwd()+"\\src\\Twokindslogo.png").convert("RGB")
