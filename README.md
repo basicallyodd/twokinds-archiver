@@ -18,7 +18,8 @@ pip install -r requirements.txt
 
 ## Running the script
 ```bash
-python 2kinds.py
+python twokinds.py # downloads all pages as images
+python twopdf.py -m {single,chapters} # combines images into a PDF or multiple PDFs by chapter
 ```
 
 
